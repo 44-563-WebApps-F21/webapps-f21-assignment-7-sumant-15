@@ -26,37 +26,48 @@
 
 
 <body>
-    <h2>Sumant Chaganti builds a stack</h2>
-
-    <input type="text" id="txt">
-    <button onclick="makeNewDiv()">Push value</button>
-<br>
-		<div class="flex-container" id="target">
-		  <div class="stack">
-            row item 1
-          </div>   
-		  <div class="stack">row item 2</div>  
-		  <div class="stack">row item 3</div>  
-		</div>
-	
-	<!-- <p> Press the button to create an new element of type div and then add it to the container.
-		</p> -->
-		
-	
-	
+    <h1>Sumant Chaganti builds a stack</h1>
+    <input id="inputElement" type="text"><br><br>
+    <div class="flex-container" id="target">
+        <div class="stack">row item 1</div>   
+        <div class="stack">row item 2</div>  
+        <div class="stack">row item 3</div>  
+    </div><br>	
+	<p> Press the button to create an new element of type div and then add it to the container.</p>
+	<button onclick="makeNewDiv()">Push value</button>
+    <button onclick="popItem()">Pop</button>
+    <button onclick="zap()">Zap values</button>
 </body>
 <script>
-
-	function makeNewDiv(){
+    function makeNewDiv(){
 		/* make the div and its text */
-		let element = document.createElement("p")
-		element.innerHTML = document.getElementById('txt').value;
-        document.getElementById('txt').className = 'stack';
-		// element.style.color = "orange"
+		let element = document.createElement("div")
+        let input = document.getElementById("inputElement")
+		element.innerHTML = input.value
+		element.className = "stack"
 
 		/* add it to the container */
 		document.getElementById('target').appendChild(element)
-		
 	}
+    function popItem(){
+        var stackItems = document.getElementsByClassName("stack")
+        var stackLength = stackItems.length
+        if(stackLength>0)
+            stackItems[stackLength-1].remove()
+    }
+    function zap(){
+        var stackItems = document.getElementsByClassName("stack")
+        let input = document.getElementById("inputElement").value
+        if(stackItems!= undefined && stackItems.length >0){
+            for(let i=0; i<stackItems.length; i++){
+                if(stackItems[i].innerHTML == input){
+                    var itemToBeRemoved = stackItems[i].innerHTML
+                    stackItems[i].remove()
+                    console.log("removed_element",itemToBeRemoved)
+                    i--
+                }
+            }
+        }
+    }
 </script>
 </html>	
